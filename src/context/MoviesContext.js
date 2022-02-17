@@ -12,6 +12,7 @@ export default function MoviesContext({children}) {
     const [loading,setLoading] = useState(true)
     // const [reviews,dispatchReviews] = useState([])
 
+    //recibe el array de la movie, una calificación de 1 a 5 y un comentario
     const addReview = (movie,stars,comment)=>{
         setMovies({type:'addStars',movie,stars})
         dispatchReviews({type:'addReview',idMovie:movie._id,comment})

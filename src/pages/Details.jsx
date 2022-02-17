@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { useParams ,Navigate} from 'react-router-dom';
 import Movie from '../components/Movie';
+import Reviews from '../components/Reviews';
 import { moviesContext } from '../context/MoviesContext';
 //import NotFound from './NotFound';
 
@@ -44,10 +45,17 @@ export default function Details() {
 
       {/* && (and): Operador de cortocircuito */}
       {/* || (or)*/}
+      <table class="table">
+            <thead>
+                Tabla
+            </thead>
+            <tbody>
       {reviews.map(
         review=>review.idMovie===id
-        &&<p key={review.id}>{review.comment}</p>)
+        &&<Reviews key={review.id} review={review}/>)
       }
+      </tbody>
+        </table>
 
       {/* Mostrar comentarios */}
   </div>;
