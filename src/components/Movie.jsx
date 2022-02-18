@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import "../css/home.css"
 
 export default function Movie({movie}) {
     return <article className='movie'>
