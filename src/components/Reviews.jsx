@@ -4,7 +4,7 @@ import Review from './Review'
 const Reviews = ({review}) => {
   return (
         
-                <tr class="table-active">
+                <tr>
                     <Review key={review.id} review={review}/>
                 </tr>
   
