@@ -21,11 +21,12 @@ export default function MoviesContext({children}) {
     //Reto: Cambiar las reviews del estado a reducers
 
     useEffect(()=>{
-        fetch("https://backendtzuzulcode.wl.r.appspot.com/movies")
+        fetch("https://backendtzul.rj.r.appspot.com/movies")
         .then(res=>res.json())
         .then(data=>{
+            const {success,movies} = data;
             console.log(data)
-            setMovies({type:"addMovies",movies:data})
+            setMovies({type:"addMovies",movies})
             setLoading(false)
         })
         .catch(error=>setLoading(false))
