@@ -22,6 +22,7 @@ h1{
     color: azure;
     font-size: 1.5rem;
     text-transform: uppercase;
+    margin: 15px;
 }
  
 a {
@@ -39,9 +40,12 @@ article.movie:hover{
     opacity: 0.8;
 }
 
-.movie__stars {
-    font-size: 3rem;
-    color: yellow;
+.box {
+       margin: 30px;
+}
+article.box{
+       justify-items: baseline;
+       justify-content: baseline;
 }
 /* .movie {
     display: flex;
