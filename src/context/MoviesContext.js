@@ -10,9 +10,9 @@ export default function MoviesContext({children}) {
     const [reviews,dispatchReviews] = useReducer(reviewsReducer,reviewsInitialState)
     const [loading,setLoading] = useState(true)
 
-    const addReview = (movie,stars,comment)=>{
+    const addReview = (movie,stars,comment,title_comment)=>{
         setMovies({type:'addStars',movie,stars})
-        dispatchReviews({type:'addReview',idMovie:movie._id,comment})
+        dispatchReviews({type:'addReview',idMovie:movie._id,stars,comment,title_comment})
         // setReviews([...reviews,{id:reviews.length,idMovie:movie.id,comment}])
     }
 
