@@ -30,33 +30,57 @@ export default function Details() {
   }
 
   return loading?<p>Loading...</p>:<div>
-      <p>Details {id}</p>
-      <Movie movie={movie}></Movie>
       {console.log(reviews)}
-      <div className='container'>       
-        <div className="mb-3">
-          <label for="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
-          <input className="form-control" ref={titulo_comentario} type="text"></input>
-        </div>
-        <div className="mb-3">
-          <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-          <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+      <div className='container'> 
+        <div className="row">
+          <div className="col-12">
+            <div className="row">
+              <div className="col-12 mt-5">
+              <h1>{movie.name} </h1>
+              </div>
+              <div className="col-4">
+              <img className='pt-4 movie__image' src={movie.banner} alt={movie.title}></img>
+              </div>
+              <div className="col-8 p-4">
+                <p>{movie.description}</p>
+                <p>Fecha de lanzamiento: {movie.year}</p>
+                <p>{movie.rating}</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 mt-5">
+            <div className="form_comment">
+              <div className="mb-3">
+                <label for="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
+                <input className="form-control" ref={titulo_comentario} type="text"></input>
+              </div>
+              <div className="mb-3">
+                <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
 
-        <StarRating />
+              <StarRating />
 
-        <select ref={rating}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-        </select>
-        <button onClick={add}>Agregar review</button>
+              <select ref={rating}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </select>
+              <button onClick={add}>Agregar review</button>
+            </div>
 
-        {reviews?.map(
-        review=>review.idMovie===id
-        &&<Reviews key={review.id} review={review}/>)}
+            <div className="reviews mt-5">
+              {
+              reviews==0?<p>Esta película aún no tiene reviews</p>:reviews.map(
+              review=>review.idMovie===id
+              &&<Reviews key={review.id} review={review}/>)
+              }
+            </div>
+
+          </div>
+        </div>     
       </div>
   </div>;
 }
