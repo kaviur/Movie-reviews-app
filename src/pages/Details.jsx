@@ -8,6 +8,7 @@ export default function Details() {
   const {id} = useParams()
   const {movies,reviews,addReview,loading} = useContext(moviesContext)
   const comentario = useRef()
+  const titulo_comentario = useRef()
   const rating = useRef()
 
   const movie = movies.filter(movie=>movie._id===id)[0]
@@ -17,17 +18,30 @@ export default function Details() {
   }
 
   const add = ()=>{
-    let comment = comentario.current.value
-    let stars = rating.current.value
-    addReview(movie,stars,comment)
+    let comment = comentario.current.value.trim()
+    let title_comment = titulo_comentario.current.value.trim()
+
+    if(comment){
+      let stars = rating.current.value
+      addReview(movie,stars,comment,title_comment)
+      comentario.current.value = ''
+    }
   }
 
   return loading?<p>Loading...</p>:<div>
       <p>Details {id}</p>
       <Movie movie={movie}></Movie>
       {console.log(reviews)}
-      <div>
-        <input ref={comentario} type="text"></input>
+      <div className='container'>       
+        <div className="mb-3">
+          <label for="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
+          <input className="form-control" ref={titulo_comentario} type="text"></input>
+        </div>
+        <div className="mb-3">
+          <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+          <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
         <select ref={rating}>
           <option value={1}>1</option>
           <option value={2}>2</option>
@@ -36,20 +50,10 @@ export default function Details() {
           <option value={5}>5</option>
         </select>
         <button onClick={add}>Agregar review</button>
-      </div>
 
-      <table className="table">
-            <thead>
-                Reviews
-            </thead>
-            <tbody>
-      {reviews?.map(
+        {reviews?.map(
         review=>review.idMovie===id
-        &&<Reviews key={review.id} review={review}/>)
-      }
-      </tbody>
-      </table>
-
-      {/* Mostrar comentarios */}
+        &&<Reviews key={review.id} review={review}/>)}
+      </div>
   </div>;
 }
