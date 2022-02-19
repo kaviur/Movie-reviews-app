@@ -8,9 +8,6 @@ const Reviews = ({review}) => {
           <blockquote class="blockquote">
             <p>{review.comment}</p>
           </blockquote>
-          <blockquote class="blockquote">
-            <p>{review.comment}</p>
-          </blockquote>
             <div>
             {review.fecha}
             </div>
