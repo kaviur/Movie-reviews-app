@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import { FaStar } from "react-icons/fa";
 
+//enviar rating al contexto
+
 const StarRating = () => {
        const [rating, setRating] = useState(null);
        const [hover, setHover] = useState(null)
-
-
 
        return (
               <div>
@@ -13,7 +13,7 @@ const StarRating = () => {
                             const ratingValue = i + 1;
 
                             return (
-                                   <label className="lasestrellas">
+                                   <label key={i} className="lasestrellas">
                                           <input 
                                           type="radio" 
                                           name="rating" 

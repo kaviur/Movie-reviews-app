@@ -2,6 +2,7 @@ import React, { useContext, useRef } from 'react';
 import { useParams ,Navigate} from 'react-router-dom';
 import Movie from '../components/Movie';
 import Reviews from '../components/Reviews';
+import StarRating from '../components/StarRating';
 import { moviesContext } from '../context/MoviesContext';
 
 export default function Details() {
@@ -41,6 +42,8 @@ export default function Details() {
           <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
           <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+
+        <StarRating />
 
         <select ref={rating}>
           <option value={1}>1</option>
