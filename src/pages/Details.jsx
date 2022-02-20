@@ -1,6 +1,5 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useParams ,Navigate} from 'react-router-dom';
-import Movie from '../components/Movie';
 import Reviews from '../components/Reviews';
 import StarRating from '../components/StarRating';
 import { moviesContext } from '../context/MoviesContext';
@@ -10,7 +9,7 @@ export default function Details() {
   const {movies,reviews,addReview,loading} = useContext(moviesContext)
   const comentario = useRef()
   const titulo_comentario = useRef()
-  const rating = useRef()
+  const [rating, setRating] = useState(0)
 
   const movie = movies.filter(movie=>movie._id===id)[0]
 
@@ -18,14 +17,18 @@ export default function Details() {
     return <Navigate to="/notfound"/>
   }
 
+  const stars = (value)=>{
+    setRating(value)
+  }
+
   const add = ()=>{
     let comment = comentario.current.value.trim()
     let title_comment = titulo_comentario.current.value.trim()
 
     if(comment){
-      let stars = rating.current.value
-      addReview(movie,stars,comment,title_comment)
+      addReview(movie,rating,comment,title_comment)
       comentario.current.value = ''
+      titulo_comentario.current.value = ''
     }
   }
 
@@ -49,7 +52,20 @@ export default function Details() {
             </div>
           </div>
           <div className="col-12 mt-5">
-            <div className="form_comment">
+            <div className="reviews">
+              {
+                console.log(movie.numberOfReviews)
+              }
+              {
+              reviews.map(
+              review=>{
+                if(review.idMovie===id){
+                  return <Reviews key={review.id} review={review}/>
+                }
+              })
+              }
+            </div>
+            <div className="form_comment mt-5">
               <div className="mb-3">
                 <label for="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
                 <input className="form-control" ref={titulo_comentario} type="text"></input>
@@ -59,26 +75,10 @@ export default function Details() {
                 <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
 
-              <StarRating />
-
-              <select ref={rating}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-              </select>
+              <StarRating stars={stars}/>
+              
               <button onClick={add}>Agregar review</button>
             </div>
-
-            <div className="reviews mt-5">
-              {
-              reviews==0?<p>Esta película aún no tiene reviews</p>:reviews.map(
-              review=>review.idMovie===id
-              &&<Reviews key={review.id} review={review}/>)
-              }
-            </div>
-
           </div>
         </div>     
       </div>

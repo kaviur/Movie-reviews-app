@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, {useContext,useState} from "react";
 import { FaStar } from "react-icons/fa";
 
 //enviar rating al contexto
 
-const StarRating = () => {
+const StarRating = ({stars}) => {
        const [rating, setRating] = useState(null);
        const [hover, setHover] = useState(null)
+
+       const setStars = (val)=>{
+              setRating(val)
+              stars(val)
+       }
 
        return (
               <div>
@@ -18,7 +23,7 @@ const StarRating = () => {
                                           type="radio" 
                                           name="rating" 
                                           value={ratingValue} 
-                                          onClick={() => setRating(ratingValue)}
+                                          onClick={() => setStars(ratingValue)}
                                           />
                                           <FaStar 
                                           className="star" 

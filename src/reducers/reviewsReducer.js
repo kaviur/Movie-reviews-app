@@ -13,6 +13,9 @@ export default function reviewsReducer(state,action){
 
             newState = {reviews:[...state.reviews,{id:state.reviews.length,idMovie,stars,comment,title_comment,fecha}]}
             break;
+        default:
+            console.log('default review reducer');
+            break;
     }
 
     return newState
