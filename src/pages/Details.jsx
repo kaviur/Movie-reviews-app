@@ -2,11 +2,12 @@ import React, { useContext, useRef, useState } from 'react';
 import { useParams ,Navigate} from 'react-router-dom';
 import Reviews from '../components/Reviews';
 import StarRating from '../components/StarRating';
+import Stars from '../components/Stars';
 import { moviesContext } from '../context/MoviesContext';
 
 export default function Details() {
   const {id} = useParams()
-  const {movies,reviews,addReview,loading} = useContext(moviesContext)
+  const {movies,reviews,addReview,deleteReview,loading} = useContext(moviesContext)
   const comentario = useRef()
   const titulo_comentario = useRef()
   const [rating, setRating] = useState(0)
@@ -32,6 +33,10 @@ export default function Details() {
     }
   }
 
+  const removeReview = (id) => {
+    deleteReview(id)
+  }
+
   return loading?<p>Loading...</p>:<div>
       {console.log(reviews)}
       <div className='container'> 
@@ -39,15 +44,17 @@ export default function Details() {
           <div className="col-12">
             <div className="row">
               <div className="col-12 mt-5">
-              <h1>{movie.name} </h1>
               </div>
               <div className="col-4">
-              <img className='pt-4 movie__image' src={movie.banner} alt={movie.title}></img>
+              <img className='pt-4 movie__image' src={movie.poster} alt={movie.title}></img>
               </div>
               <div className="col-8 p-4">
-                <p>{movie.description}</p>
-                <p>Fecha de lanzamiento: {movie.year}</p>
-                <p>{movie.rating}</p>
+                <h1>{movie.name} </h1>
+                <div className="mt-3">
+                  <p>{movie.description}</p>
+                  <p>Fecha de lanzamiento: {movie.year}</p>
+                  <Stars rating={movie.rating}/>
+                </div>
               </div>
             </div>
           </div>
@@ -60,18 +67,18 @@ export default function Details() {
               reviews.map(
               review=>{
                 if(review.idMovie===id){
-                  return <Reviews key={review.id} review={review}/>
+                  return <Reviews key={review.id} review={review} removeReview={removeReview}/>
                 }
               })
               }
             </div>
             <div className="form_comment mt-5">
               <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
+                <label htmlFor="exampleFormControlInput1" className="form-label">Escribe un título para tu opinión</label>
                 <input className="form-control" ref={titulo_comentario} type="text"></input>
               </div>
               <div className="mb-3">
-                <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                <label htmlFor="exampleFormControlTextarea1" className="form-label">Deja tu opinión</label>
                 <textarea className="form-control" ref={comentario} id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
 

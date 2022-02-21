@@ -13,8 +13,14 @@ export default function reviewsReducer(state,action){
 
             newState = {reviews:[...state.reviews,{id:state.reviews.length,idMovie,stars,comment,title_comment,fecha}]}
             break;
+        case 'deleteReview':
+            const {idReview} = action
+            //TODO: da error
+            newState = {reviews:state.reviews.filter(review=>review.id !== idReview)};
+            //newState = state
+            break;
         default:
-            console.log('default review reducer');
+            newState=state;
             break;
     }
 
