@@ -5,10 +5,10 @@ export const moviesInitialState = {
 
 export default function moviesReducer(state,action){
     let newState;
-    switch(action.type){
+    const {type,payload} = action
+    switch(type){
         case 'addStars':
             const {movie,stars} = action
-            //TODO: crear una api que tenga movies.star y movie.numberOfReviews en 0
             movie.stars = movie.stars + parseInt(stars)
             movie.numberOfReviews++
             newState = {movies:[...state.movies]}
@@ -16,6 +16,11 @@ export default function moviesReducer(state,action){
         case 'addMovies':
             const {movies} = action
             newState = {movies}
+            break;
+        case 'topTen':
+            //const {topTen} = action
+            newState = {movies:[...state.movies]}
+            break;
             break;
         default:
             newState = state;

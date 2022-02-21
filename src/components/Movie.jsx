@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import "../css/home.css"
-import StarRating from './StarRating';
 import Stars from './Stars';
 
 export default function Movie({movie}) {

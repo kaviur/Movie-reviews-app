@@ -6,12 +6,12 @@ export const moviesContext = createContext()
 
 export default function MoviesContext({children}) {
 
-    const [pelis,setPelis] = useReducer(moviesReducer,moviesInitialState)
+    const [movies,setMovies] = useReducer(moviesReducer,moviesInitialState)
     const [reviews,dispatchReviews] = useReducer(reviewsReducer,reviewsInitialState)
     const [loading,setLoading] = useState(true)
 
     const addReview = (movie,stars,comment,title_comment)=>{
-        setPelis({type:'addStars',movie,stars})
+        setMovies({type:'addStars',movie,stars})
         dispatchReviews({type:'addReview',idMovie:movie._id,stars,comment,title_comment})
     }
 
@@ -20,18 +20,17 @@ export default function MoviesContext({children}) {
     }
 
     useEffect(()=>{
-        fetch("https://backendtzul.rj.r.appspot.com/movies")
+        fetch("https://cinemalis-342015.rj.r.appspot.com/movies")
         .then(res=>res.json())
         .then(data=>{
-            const {movies} = data;
-            //console.log(data)
-            setPelis({type:"addMovies",movies})
+            console.log(data)
+            setMovies({type:"addMovies",movies:data})
             setLoading(false)
         })
         .catch(error=>setLoading(false))
     },[])
 
-    return <moviesContext.Provider value={{loading,movies:pelis.movies,addReview,deleteReview,reviews:reviews.reviews}}>
+    return <moviesContext.Provider value={{loading,movies:movies.movies,addReview,deleteReview,reviews:reviews.reviews}}>
         {children}
     </moviesContext.Provider>
 }
