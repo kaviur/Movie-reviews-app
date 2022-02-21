@@ -1,4 +1,28 @@
 .comments{
-    background-color: rgb(26, 26, 27);
-    color: azure;
+    color: #f0ffff;
+}
+
+.comments h2{
+    color: #e60073;
+}
+
+.comments hr{
+    border: 2px solid;
+    color: #e60073;
+}
+
+.blockquote p{
+    padding-top: 10px;
+}
+
+.date{
+    color: gray;
+}
+
+.comments span{
+    color: gray;
+}
+
+.rainting{
+    color: yellow;
 }
