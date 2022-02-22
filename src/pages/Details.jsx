@@ -4,6 +4,7 @@ import Reviews from '../components/Reviews';
 import StarRating from '../components/StarRating';
 import Stars from '../components/Stars';
 import { moviesContext } from '../context/MoviesContext';
+import "../css/details.css"
 
 export default function Details() {
   const {id} = useParams()
@@ -45,20 +46,23 @@ export default function Details() {
             <div className="row">
               <div className="col-12 mt-5">
               </div>
-              <div className="col-4">
+              <div className="col-sm-12 col-md-6">
               <img className='pt-4 movie__image' src={movie.poster} alt={movie.title}></img>
               </div>
-              <div className="col-8 p-4">
+              <div className="col-sm-12 col-md-6 p-4">
                 <h1>{movie.name} </h1>
-                <div className="mt-3">
+                <div className="descrption mt-3">
                   <p>{movie.description}</p>
                   <p>Fecha de lanzamiento: {movie.year}</p>
+                  <div className='starts'>
                   <Stars rating={movie.rating}/>
+                  </div>
+                 
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-12 mt-5">
+          <div className="col-sm-12 col-md-6 mt-5">
             <div className="reviews">
               {
                 console.log(movie.numberOfReviews)

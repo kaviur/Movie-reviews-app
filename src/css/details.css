@@ -1,0 +1,29 @@
+.descrption p{
+    font-size: 1.2rem;
+    padding-top: 50px;
+    padding-left: 20px;
+}
+
+.starts {
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+.form_comment {
+    font-size: 1.2rem;
+    margin: 5px;
+    padding: 5px;
+}
+
+.form_comment button {
+    padding: 10px;
+    color: white;
+    border: none;
+}
+
+@media (max-width: 1024px) {
+    .description p {
+        font-size: 1rem;
+    }
+   
+}
