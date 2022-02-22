@@ -26,8 +26,8 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav__item">
-            <a href='/details/:id' className="nav__link">
-              Details
+            <a href='/signup' className="nav__link">
+              Registrarse
             </a>
           </li>
           <li className="nav__item">

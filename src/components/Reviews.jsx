@@ -1,6 +1,7 @@
 import React from 'react';
 import "./reviews.css"
 import { FaTrashAlt } from "react-icons/fa";
+import Stars from './Stars';
 
 
 const Reviews = ({review,removeReview}) => {
@@ -16,7 +17,7 @@ const Reviews = ({review,removeReview}) => {
             {review.fecha}
             </div>
             <div className='rainting'>
-             <span>Puntuación </span> 
+             <span><Stars rating={review.stars}/> </span> 
             {review.stars} <br></br>
             <FaTrashAlt
             color={"#e60073"}

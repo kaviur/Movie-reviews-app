@@ -30,6 +30,7 @@ a {
 }
 
 article.movie {
+    background-color: #000000;
     border: 2px solid #AAAAAA;
     border-radius: 15px;
     text-align: center;
