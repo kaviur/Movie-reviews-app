@@ -11,7 +11,7 @@ ReactDOM.render(
   <React.StrictMode>
     <UserContext>
       <MoviesContext>
-        <App />
+        <App></App>
       </MoviesContext>
     </UserContext>
   </React.StrictMode>,

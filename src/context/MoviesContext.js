@@ -25,10 +25,13 @@ export default function MoviesContext({children}) {
         .then(data=>{
             console.log(data)
             setMovies({type:"addMovies",movies:data})
+            console.log(movies.movies);
             setLoading(false)
         })
         .catch(error=>setLoading(false))
+        
     },[])
+
 
     return <moviesContext.Provider value={{loading,movies:movies.movies,addReview,deleteReview,reviews:reviews.reviews}}>
         {children}

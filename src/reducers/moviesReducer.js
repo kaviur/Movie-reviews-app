@@ -1,6 +1,7 @@
 
 export const moviesInitialState = {
-    movies:[]
+    movies:[],
+    topTen:[]
 }
 
 export default function moviesReducer(state,action){
@@ -16,6 +17,10 @@ export default function moviesReducer(state,action){
         case 'addMovies':
             const {movies} = action
             newState = {movies}
+            break;
+        case 'addTopTen':
+            const {topTen} = action
+            newState = {topTen}
             break;
         case 'topTen':
             //const {topTen} = action
