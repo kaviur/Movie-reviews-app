@@ -6,7 +6,7 @@ import { GiFilmSpool } from 'react-icons/gi';
 const Navbar = () => {
     const [active, setActive] = useState("nav__menu");
     const [icon, setIcon] = useState("nav__toggler");
-    const {user} = useContext(userContext)
+    const {user,setUser} = useContext(userContext)
 
     const navToggle = () => {
       if (active === "nav__menu") {
@@ -18,6 +18,11 @@ const Navbar = () => {
         setIcon("nav__toggler toggle");
       } else setIcon("nav__toggler");
     };
+
+    function logout() {
+      setUser({})
+    }
+
     return (
       <nav className="nav">
         <li className="nav__item"  >
@@ -38,7 +43,7 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav__item">
-              {user.logged?`Hola ${user.name}`:<a href='/login' className="nav__link">
+              {user.logged?<button onClick={logout} type="button" class="btn btn-link">Salir {user.name}</button>:<a href='/login' className="nav__link">
               Login</a>}
           </li>
         </ul>

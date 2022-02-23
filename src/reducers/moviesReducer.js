@@ -5,26 +5,17 @@ export const moviesInitialState = {
 
 export default function moviesReducer(state,action){
     let newState;
-    const {type,payload} = action
+    const {type} = action
     switch(type){
         case 'addStars':
-            const {movie,stars} = action
-            movie.stars = movie.stars + parseInt(stars)
-            movie.numberOfReviews++
+            const {movie,estrellas} = action
+            movie.stars = movie.stars + parseInt(estrellas)
+            movie.numReviews++
             newState = {movies:[...state.movies]}
             break;
         case 'addMovies':
-            const {movies} = action
-            newState = {movies}
-            break;
-        case 'addTopTen':
-            const {topTen} = action
-            newState = {topTen}
-            break;
-        case 'topTen':
-            //const {topTen} = action
-            newState = {movies:[...state.movies]}
-            break;
+            const {id,year,rating,numReviews,stars,poster,name,description,createdAt,banner} = action
+            newState = {reviews:[...state.reviews,{id,year,rating,numReviews,stars,poster,name,description,createdAt,banner}]}
             break;
         default:
             newState = state;

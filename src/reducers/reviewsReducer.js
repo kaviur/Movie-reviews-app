@@ -6,13 +6,9 @@ export default function reviewsReducer(state,action){
     let newState;
     switch(action.type){
         case 'addReview':
-            const {id,idMovie,stars,comment,title_comment,username,date} = action
+            const {id,idMovie,estrellas,comment,title_comment,username,date} = action
 
-            newState = {reviews:[...state.reviews,{id,idMovie,stars,comment,title_comment,username,date}]}
-            break;
-        case 'addR':
-            const {reviews} = action
-            newState = {reviews}
+            newState = {reviews:[...state.reviews,{id,idMovie,estrellas,comment,title_comment,username,date}]}
             break;
         case 'deleteReview':
             const {user} = action

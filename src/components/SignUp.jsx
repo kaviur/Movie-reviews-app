@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import {Navigate} from 'react-router-dom';
 import { userContext } from '../context/UserContext'
 import "../css/login.css"
 
@@ -10,9 +11,6 @@ const SignUp = () => {
         event.preventDefault()
         const {email,password,firstName,lastName,birthday,city} = event.target
 
-        console.log(email.value,password.value)
-
-        //Datos para el registro: firstName,lastName,birthday,city,email,password
         fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/signup",{
             method:"POST",
             credentials:'include',
@@ -29,7 +27,11 @@ const SignUp = () => {
             })
         }).then(res=>res.json())
         .then(user=>{
-            console.log(user)
+            console.log(user.success)
+            if(user.success === true){
+                return <Navigate to="/login"/>
+            }
+
             //setUser({logged:true,name:user.data.userName})
         }).catch(error=>setUser({logged:false}))
         

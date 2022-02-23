@@ -22,7 +22,7 @@ const Reviews = ({review,removeReview}) => {
             {review.date}
             </div>
             <div className='rainting'>
-             <span><Stars rating={review.stars}/> </span> 
+             <span><Stars rating={review.estrellas}/> </span> 
             {
               review.username===user.name&&
               <FaTrashAlt

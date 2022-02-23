@@ -14,7 +14,6 @@ const LoginK = () => {
     const signIn = (event) => {
         event.preventDefault()
         const {email,password} = event.target
-        //console.log(email.value,password.value)
 
         fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
             method:"POST",

@@ -43,7 +43,7 @@ export default function Details() {
 
   const add = ()=>{
 
-    if(user.logged === true){
+    if(user.logged !== true){
       Swal.fire({
         title: '<strong>Login requerido</strong>',
         icon: 'info',
