@@ -10,6 +10,7 @@ export default function MoviesContext({children}) {
     const [reviews,dispatchReviews] = useReducer(reviewsReducer,reviewsInitialState)
     const [loading,setLoading] = useState(true)
 
+
     const addReview = (movie,stars,comment,title_comment)=>{
         setMovies({type:'addStars',movie,stars})
         dispatchReviews({type:'addReview',idMovie:movie._id,stars,comment,title_comment})
@@ -29,6 +30,18 @@ export default function MoviesContext({children}) {
             setLoading(false)
         })
         .catch(error=>setLoading(false))
+        
+    },[])
+
+
+    useEffect(()=>{
+        fetch("https://cinemalis-342015.rj.r.appspot.com/reviews")
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            dispatchReviews({type:"addR",reviews:data})
+        })
+        .catch(error=>console.log(error))
         
     },[])
 

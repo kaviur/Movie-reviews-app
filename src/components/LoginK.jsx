@@ -1,10 +1,15 @@
 import React, { useContext } from 'react'
 import { userContext } from '../context/UserContext'
+import {Navigate} from 'react-router-dom';
 import "../css/login.css"
 
 const LoginK = () => {
 
-    const {setUser} = useContext(userContext)
+    const {user,setUser} = useContext(userContext)
+
+    if(user.logged){
+        return <Navigate to="/"/>
+    }
 
     const signIn = (event) => {
         event.preventDefault()
@@ -12,12 +17,11 @@ const LoginK = () => {
         console.log(email.value,password.value)
         //Datos para el registro: firstName,lastName,birthday,city,email,password
         //https://backendtzuzulcode.wl.r.appspot.com/auth/login
-        fetch("https://cinemalis-342015.rj.r.appspot.com/auth/login",{
+        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
             method:"POST",
-            //credentials:'include',
+            credentials:'include',
             headers:{
-                "Content-Type":"application/json",
-                //'Access-Control-Allow-Origin':'*'
+                "Content-Type":"application/json"
             },
             body:JSON.stringify({
                 email:email.value,
@@ -26,7 +30,7 @@ const LoginK = () => {
         }).then(res=>res.json())
         .then(user=>{
             console.log(user)
-            //setUser({logged:true,name:user.data.firstName})
+            setUser({logged:true,name:user.data.firstName})
         }).catch(error=>setUser({logged:false}))
         
     }

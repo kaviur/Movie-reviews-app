@@ -8,19 +8,22 @@ const SignUp = () => {
 
     const signUp = (event) => {
         event.preventDefault()
-        const {email,password,username} = event.target
+        const {email,password,firstName,lastName,birthday,city} = event.target
 
-        console.log(email.value,password.value,username.value)
+        console.log(email.value,password.value)
 
         //Datos para el registro: firstName,lastName,birthday,city,email,password
-        fetch("https://cinemalis-342015.rj.r.appspot.com/auth/signup",{
+        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/signup",{
             method:"POST",
             credentials:'include',
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                useName:username.value,
+                firstName:firstName.value,
+                lastName:lastName.value,
+                birthday:birthday.value,
+                city:city.value,
                 email:email.value,
                 password:password.value
             })
@@ -40,8 +43,23 @@ const SignUp = () => {
                     <h3>Register</h3>
 
                     <div className="form-group">
-                        <label>Nombre de usuario</label>
-                        <input type="text" className="form-control" placeholder="username" name="username"/>
+                        <label>Nombre</label>
+                        <input type="text" className="form-control" placeholder="Nombre" name="firstName"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Apellido</label>
+                        <input type="text" className="form-control" placeholder="Apellido" name="lastName"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Fecha de nacimiento</label>
+                        <input type="date" className="form-control" name="birthday"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Ciudad</label>
+                        <input type="text" className="form-control" placeholder="Ciudad" name="city"/>
                     </div>
 
                     <div className="form-group">
@@ -54,9 +72,9 @@ const SignUp = () => {
                         <input type="password" className="form-control" placeholder="Enter password" name="password"/>
                     </div>
 
-                    <button className="btn btn-dark btn-lg btn-block">Register</button>
+                    <button className="btn btn-dark btn-lg btn-block">Registrarse</button>
                     <p className="forgot-password text-right">
-                        Already registered <a href="/login">log in?</a>
+                        ¿Ya tienes una cuenta? <a href="/login">Entrar</a>
                     </p>
             </form>
         </div>

@@ -1,7 +1,6 @@
 
 export const moviesInitialState = {
-    movies:[],
-    topTen:[]
+    movies:[]
 }
 
 export default function moviesReducer(state,action){

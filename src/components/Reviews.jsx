@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./reviews.css"
 import { FaTrashAlt } from "react-icons/fa";
 import Stars from './Stars';
@@ -18,7 +18,6 @@ const Reviews = ({review,removeReview}) => {
             </div>
             <div className='rainting'>
              <span><Stars rating={review.stars}/> </span> 
-            {review.stars} <br></br>
             <FaTrashAlt
             color={"#e60073"}
             //TODO: eliminar un comentario

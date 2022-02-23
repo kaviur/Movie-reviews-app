@@ -38,7 +38,7 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav__item">
-              {user.logged?`Bienvenido ${user.name}`:<a href='/login' className="nav__link">
+              {user.logged?`Hola ${user.name}`:<a href='/login' className="nav__link">
               Login</a>}
           </li>
         </ul>

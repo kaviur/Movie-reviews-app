@@ -13,6 +13,10 @@ export default function reviewsReducer(state,action){
 
             newState = {reviews:[...state.reviews,{id:state.reviews.length,idMovie,stars,comment,title_comment,fecha}]}
             break;
+        case 'addR':
+            const {reviews} = action
+            newState = {reviews}
+            break;
         case 'deleteReview':
             const {idReview} = action
             //TODO: da error
