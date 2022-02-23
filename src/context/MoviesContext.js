@@ -9,6 +9,7 @@ export default function MoviesContext({children}) {
     const [movies,setMovies] = useReducer(moviesReducer,moviesInitialState)
     const [reviews,dispatchReviews] = useReducer(reviewsReducer,reviewsInitialState)
     const [loading,setLoading] = useState(true)
+    const [numberReviews,setNumberReviews] = useState(0)
 
 
     const addReview = (id,movie,stars,comment,title_comment,username,date)=>{
@@ -46,7 +47,7 @@ export default function MoviesContext({children}) {
     },[])
 
 
-    return <moviesContext.Provider value={{loading,movies:movies.movies,addReview,deleteReview,reviews:reviews.reviews}}>
+    return <moviesContext.Provider value={{setNumberReviews,loading,movies:movies.movies,addReview,deleteReview,reviews:reviews.reviews}}>
         {children}
     </moviesContext.Provider>
 }

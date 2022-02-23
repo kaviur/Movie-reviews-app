@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
 export default function Details() {
   //const Swal = require('sweetalert2')
   const {id} = useParams()
-  const {movies,reviews,addReview,deleteReview,loading} = useContext(moviesContext)
+  const {setNumberReviews,movies,reviews,addReview,deleteReview,loading} = useContext(moviesContext)
   const comentario = useRef()
   const titulo_comentario = useRef()
   const [rating, setRating] = useState(0)
@@ -19,6 +19,8 @@ export default function Details() {
   const {user} = useContext(userContext)
 
   const movie = movies.filter(movie=>movie._id===id)[0]
+  const numberOfReviews = reviews.filter(review=>review.idMovie === id).length
+  setNumberReviews(numberOfReviews)
 
   if(!movie && !loading){
     return <Navigate to="/notfound"/>
@@ -93,7 +95,11 @@ export default function Details() {
                 <h1>{movie.name} </h1>
                 <div className="descrption mt-3">
                   <p>{movie.description}</p>
+                  <br />
+                  <div className="numberOfReviews">Esta película tiene {numberOfReviews} {numberOfReviews==1?"review":"reviews"}</div>
+                  <hr />
                   <p>Fecha de lanzamiento: {movie.year}</p>
+                  <hr />
                   <div className='starts'>
                   <Stars rating={movie.rating}/>
                   </div>
