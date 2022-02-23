@@ -1,21 +1,23 @@
 import React, { useContext } from 'react'
-import "../css/login.css"
 import { userContext } from '../context/UserContext'
+import "../css/login.css"
 
 const LoginK = () => {
 
-    const {user,setUser} = useContext(userContext)
+    const {setUser} = useContext(userContext)
 
     const signIn = (event) => {
         event.preventDefault()
         const {email,password} = event.target
         console.log(email.value,password.value)
         //Datos para el registro: firstName,lastName,birthday,city,email,password
-        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
+        //https://backendtzuzulcode.wl.r.appspot.com/auth/login
+        fetch("https://cinemalis-342015.rj.r.appspot.com/auth/login",{
             method:"POST",
-            credentials:'include',
+            //credentials:'include',
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                //'Access-Control-Allow-Origin':'*'
             },
             body:JSON.stringify({
                 email:email.value,
@@ -24,14 +26,13 @@ const LoginK = () => {
         }).then(res=>res.json())
         .then(user=>{
             console.log(user)
-            setUser({logged:true,name:user.data.firstName})
+            //setUser({logged:true,name:user.data.firstName})
         }).catch(error=>setUser({logged:false}))
         
     }
 
   return (
-    <div className="outer mb-5">
-        <p>{user.logged?"Bienvenido "+user.name:"Sin sesión"}</p>
+    <div className="outer mt-5 mb-5">
         <div className="inner">
             <form onSubmit={signIn}>
                 <h3>Log in</h3>

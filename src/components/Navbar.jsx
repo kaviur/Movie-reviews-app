@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { userContext } from '../context/UserContext'
 import "../css/navBar.css";
+import { GiFilmSpool } from 'react-icons/gi';
 
 const Navbar = () => {
     const [active, setActive] = useState("nav__menu");
     const [icon, setIcon] = useState("nav__toggler");
+    const {user} = useContext(userContext)
+
     const navToggle = () => {
       if (active === "nav__menu") {
         setActive("nav__menu nav__active");
@@ -16,9 +20,12 @@ const Navbar = () => {
     };
     return (
       <nav className="nav">
-        <a href="#" className="nav__brand">
-          Movies Reviews
-        </a>
+        <li className="nav__item"  >
+              <div style={{color: '#ffc107'}} >
+              <GiFilmSpool className="logo" size={70}  />
+              Movies.com
+              </div>
+       </li>
         <ul className={active}>
           <li className="nav__item">
             <a href='/' className="nav__link">
@@ -31,9 +38,8 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav__item">
-            <a href='/login' className="nav__link">
-              Login
-            </a>
+              {user.logged?`Bienvenido ${user.name}`:<a href='/login' className="nav__link">
+              Login</a>}
           </li>
         </ul>
         <div onClick={navToggle} className={icon}>
