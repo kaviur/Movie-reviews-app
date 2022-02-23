@@ -16,16 +16,16 @@ const Footer = () => {
               {/* Column2 */}
               <div className="col">
                 <h4>Marlys</h4>
-                <ui className="list-unstyled">
+                <ul className="list-unstyled">
                   <li></li>
-                </ui>
+                </ul>
               </div>
               {/* Column3 */}
               <div className="col">
                 <h4>Antonella</h4>
-                <ui className="list-unstyled">
+                <ul className="list-unstyled">
                   <li></li>
-                </ui>
+                </ul>
               </div>
             </div>
             <hr />

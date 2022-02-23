@@ -6,22 +6,18 @@ export default function reviewsReducer(state,action){
     let newState;
     switch(action.type){
         case 'addReview':
-            const {idMovie,stars,comment,title_comment} = action
-            const tiempoTranscurrido = Date.now();
-            const hoy = new Date(tiempoTranscurrido);
-            const fecha = hoy.toLocaleDateString();
+            const {id,idMovie,stars,comment,title_comment,username,date} = action
 
-            newState = {reviews:[...state.reviews,{id:state.reviews.length,idMovie,stars,comment,title_comment,fecha}]}
+            newState = {reviews:[...state.reviews,{id,idMovie,stars,comment,title_comment,username,date}]}
             break;
         case 'addR':
             const {reviews} = action
             newState = {reviews}
             break;
         case 'deleteReview':
-            const {idReview} = action
+            const {user} = action
             //TODO: da error
-            newState = {reviews:state.reviews.filter(review=>review.id !== idReview)};
-            //newState = state
+            newState = {reviews:state.reviews.filter(review=>review.username !== user)};
             break;
         default:
             newState=state;

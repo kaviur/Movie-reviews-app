@@ -1,17 +1,22 @@
 import React, { useContext, useRef, useState } from 'react';
+import { userContext } from '../context/UserContext'
 import { useParams ,Navigate} from 'react-router-dom';
 import Reviews from '../components/Reviews';
 import StarRating from '../components/StarRating';
 import Stars from '../components/Stars';
 import { moviesContext } from '../context/MoviesContext';
 import "../css/details.css"
+import Swal from 'sweetalert2'
 
 export default function Details() {
+  //const Swal = require('sweetalert2')
   const {id} = useParams()
   const {movies,reviews,addReview,deleteReview,loading} = useContext(moviesContext)
   const comentario = useRef()
   const titulo_comentario = useRef()
   const [rating, setRating] = useState(0)
+  const [userCommented, setUserCommented] = useState(false)
+  const {user} = useContext(userContext)
 
   const movie = movies.filter(movie=>movie._id===id)[0]
 
@@ -23,19 +28,54 @@ export default function Details() {
     setRating(value)
   }
 
-  const add = ()=>{
-    let comment = comentario.current.value.trim()
-    let title_comment = titulo_comentario.current.value.trim()
+  function uniqueId(prefix) {
+    var id = + new Date() + '-' + Math.floor(Math.random() * 1000);
+    return prefix ? prefix + id : id;
+  }
 
-    if(comment){
-      addReview(movie,rating,comment,title_comment)
-      comentario.current.value = ''
-      titulo_comentario.current.value = ''
+  const removeReview = (user)=> {
+    if( loading === false ){
+      deleteReview(user)
     }
   }
 
-  const removeReview = (id) => {
-    deleteReview(id)
+  const add = ()=>{
+
+    if(user.logged === true){
+      Swal.fire({
+        title: '<strong>Login requerido</strong>',
+        icon: 'info',
+        html:
+          'Si tienes una cuenta ' +
+          '<a href="/login">Inicia sesión</a> ' +
+          'para poder comentar. Si no estás registrado, puedes crear una aquí: '+
+          '<a href="/signup">Crear cuenta</a> ',
+        showCloseButton: true,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Cerrar',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+      })
+    }else{
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
+      const date = hoy.toLocaleDateString();
+      let comment = comentario.current.value.trim()
+      let title_comment = titulo_comentario.current.value.trim()
+      
+      if( userCommented === true ){
+        Swal.fire('Lo siento, sólo puedes agregar una review')
+      }else{
+        if(comment){
+          const id = uniqueId('id_')
+          addReview(id,movie,rating,comment,title_comment,user.name,date)
+          comentario.current.value = ''
+          titulo_comentario.current.value = ''
+          setUserCommented(true)
+        }
+      }
+    }
   }
 
   return loading?<p>Loading...</p>:<div>

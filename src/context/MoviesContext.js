@@ -11,13 +11,13 @@ export default function MoviesContext({children}) {
     const [loading,setLoading] = useState(true)
 
 
-    const addReview = (movie,stars,comment,title_comment)=>{
+    const addReview = (id,movie,stars,comment,title_comment,username,date)=>{
         setMovies({type:'addStars',movie,stars})
-        dispatchReviews({type:'addReview',idMovie:movie._id,stars,comment,title_comment})
+        dispatchReviews({type:'addReview',id,idMovie:movie._id,stars,comment,title_comment,username,date})
     }
 
-    const deleteReview = (idReview)=>{
-        dispatchReviews({type:'deleteReview',idReview})
+    const deleteReview = (username)=>{
+        dispatchReviews({type:'deleteReview',username})
     }
 
     useEffect(()=>{
@@ -26,7 +26,7 @@ export default function MoviesContext({children}) {
         .then(data=>{
             console.log(data)
             setMovies({type:"addMovies",movies:data})
-            console.log(movies.movies);
+            //console.log(movies.movies);
             setLoading(false)
         })
         .catch(error=>setLoading(false))
@@ -39,7 +39,7 @@ export default function MoviesContext({children}) {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            dispatchReviews({type:"addR",reviews:data})
+            data.map(review=>dispatchReviews({type:'addReview',id:review._id,idMovie:review.movieId,stars:review.rating,comment:review.text,title_comment:'Sin título',username:review.userName,date:review.date}))
         })
         .catch(error=>console.log(error))
         

@@ -14,9 +14,8 @@ const LoginK = () => {
     const signIn = (event) => {
         event.preventDefault()
         const {email,password} = event.target
-        console.log(email.value,password.value)
-        //Datos para el registro: firstName,lastName,birthday,city,email,password
-        //https://backendtzuzulcode.wl.r.appspot.com/auth/login
+        //console.log(email.value,password.value)
+
         fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
             method:"POST",
             credentials:'include',
