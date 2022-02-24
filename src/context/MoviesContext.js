@@ -25,9 +25,20 @@ export default function MoviesContext({children}) {
         fetch("https://cinemalis-342015.rj.r.appspot.com/movies")
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
-            data.map(movie=>setMovies({type:"addMovies",id:movie._id,year:movie.year,rating:movie.rating,numReviews:numberReviews,stars:numberReviews*movie.rating,poster:movie.poster,name:movie.name,description:movie.description,createdAt:movie.createdAt,banner:movie.banner}))
-            //console.log(movies.movies);
+            //console.log(data)
+            data.map(movie=>setMovies({
+                type:"addMovies",
+                _id:movie._id,
+                year:movie.year,
+                rating:movie.rating,
+                numReviews:numberReviews,
+                stars:numberReviews*movie.rating,
+                poster:movie.poster,
+                name:movie.name,
+                description:movie.description,
+                createdAt:movie.createdAt,
+                banner:movie.banner
+            }))
             setLoading(false)
         })
         .catch(error=>setLoading(false))
@@ -40,7 +51,20 @@ export default function MoviesContext({children}) {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            data.map(review=>dispatchReviews({type:'addReview',id:review._id,idMovie:review.movieId,estrellas:review.rating,comment:review.text,title_comment:'Sin título',username:review.userName,date:review.date}))
+            data.map(review=>{
+                    dispatchReviews({
+                    type:'addReview',
+                    id:review._id,
+                    idMovie:review.movieId,
+                    estrellas:review.rating,
+                    comment:review.text,
+                    title_comment:'Sin título',
+                    username:review.userName,
+                    date:review.date
+                })
+                //setMovies({type:'ratingApi',estrellasApi:review.rating})
+            }
+            )
         })
         .catch(error=>console.log(error))
         

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Movies from '../components/Movies';
 import "../css/home.css"
+import { moviesContext } from '../context/MoviesContext';
 
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     const [topTen, setTopTen] = useState([])
     const [estrenos, setEstrenos] = useState([])
     const [theWorst, setTheWorst] = useState([])
+    const {movies} = useContext(moviesContext)
 
     useEffect(()=>{
         fetch("https://cinemalis-342015.rj.r.appspot.com/movies/ranking/-1")
@@ -41,6 +43,9 @@ export default function Home() {
     
 
     return <div className='page'>
+            {console.log(movies)}
+            <h1>Todas las películas</h1>
+            <Movies movies={movies}/>
             <h1>Mejor Rankeadas</h1>
             <Movies movies={topTen}/>
             <h1>Peor Rankeadas</h1>
